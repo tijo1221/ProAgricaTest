@@ -1,0 +1,87 @@
+﻿@page
+@using ProAgricaTest.Models
+@model AddNewModel
+
+
+@{
+    ViewData["Title"] = "Add New";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="mt-5">
+
+    <form method="post">
+
+       <div class="form-group">
+           <label asp-for="UKVisitor.FirstName" class="form-label">First Name</label>
+           <input asp-for="UKVisitor.FirstName" class="form-label" />
+       </div>
+        <div class="form-group">
+            <label asp-for="UKVisitor.LastName" class="form-label">Last Name</label>
+            <input asp-for="UKVisitor.LastName" class="form-label" />
+        </div>
+        <div class="form-group">
+            <label asp-for="UKVisitor.VisitorCategory" class="form-label">Visitor Category</label>
+            <select class="form-select" asp-for="UKVisitor.VisitorCategory" asp-items="Html.GetEnumSelectList<Category>()"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="UKVisitor.PassportNumber" class="form-label">Passport Number</label>
+            <input asp-for="UKVisitor.PassportNumber" class="form-label" />
+        </div>
+        <div class="form-group">
+            <label asp-for="UKVisitor.PassportValidFrom" class="form-label">Passport Valid From</label>
+            <input asp-for="UKVisitor.PassportValidFrom" class="form-label" />
+        </div>
+        <div class="form-group">
+            <label asp-for="UKVisitor.PassportValidTo" class="form-label">Passport Valid To</label>
+            <input asp-for="UKVisitor.PassportValidTo" class="form-label" />
+        </div>
+        <div class="form-group">
+            <label asp-for="UKVisitor.CountryOfNationality" class="form-label">Country Of Nationality</label>
+            <input asp-for="UKVisitor.CountryOfNationality" class="form-label" />
+        </div>
+        <div class="form-group">
+            <label asp-for="UKVisitor.EntryApproved" class="form-label">EntryApproved</label>    
+            <input type="checkbox" checked>
+        </div>
+        <div class="form-group">
+            <label asp-for="UKVisitor.NoOfUKEntries" class="form-label">NoOfUKEntries</label>
+            <input asp-for="UKVisitor.NoOfUKEntries" class="form-label" />
+        </div>
+
+       @* Idea is to show the other controls only when changing the dropdown to NonEU, need more work, skipping for now*@
+       @* @if(Model.UKVisitor.VisitorCategory == 0)
+        {*@            
+            <div class="form-group">
+                <label asp-for="UKVisitor.VisaNumber" class="form-label">Visa Number</label>
+                <input asp-for="UKVisitor.VisaNumber" class="form-label" />
+            </div>
+            <div class="form-group">
+                <label asp-for="UKVisitor.VisaValidFrom" class="form-label">Visa Valid From</label>
+                <input asp-for="UKVisitor.VisaValidFrom" class="form-label" />
+            </div>
+            <div class="form-group">
+                <label asp-for="UKVisitor.VisaValidTo" class="form-label">Visa Valid To</label>
+                <input asp-for="UKVisitor.VisaValidTo" class="form-label" />
+            </div>
+            <div class="form-group">
+                <label asp-for="UKVisitor.EntryDate" class="form-label">Entry Date</label>
+                <input asp-for="UKVisitor.EntryDate" class="form-label" />
+            </div>
+            <div class="form-group">
+                <label asp-for="UKVisitor.ExitDate" class="form-label">Exit Date</label>
+                <input asp-for="UKVisitor.ExitDate" class="form-label" />
+            </div>
+            <div class="form-group">
+                <label asp-for="UKVisitor.BiometricNumber" class="form-label">Biometric Number</label>
+                <input asp-for="UKVisitor.BiometricNumber" class="form-label" />
+            </div>
+      @*  }*@
+
+        <button class="wt-20 col-12 btn btn-primary btn-lg">Submit</button>
+
+    </form>
+
+
+</div>
+

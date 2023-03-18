@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="mt-5">
+
+    <a asp-page="/AddNew" class="w-20 vtn btn-primary m-2">Add New</a>
+
+</div>
+
+    @if(Model.UKVisitors.Count() == 0)
+    {
+        <p class="text-center">No Data to display</p>
+    }
+    else{
+
+        <div class="card-columns">
+
+       @* need to add separate tabs for EU and NoNEU visitors lists(filter and display by using 'VisitorCategory' field)*@
+            
+            @foreach (var item in Model.UKVisitors)
+            {
+                <div class="card text-center">
+
+                    <div class="card-header">
+                        <h6>Visitor Name : @item.FirstName</h6>
+                        <p>Passport Number: @item.PassportNumber</p>
+                    </div>
+
+                    <div class="card-body">
+                        <p>Visitor Category: @(item.VisitorCategory == 0 ? "EUCitizen" : "NonEUCitizen")</p>                       
+                        <p>No of UK Entries: @item.NoOfUKEntries</p>
+
+                        @if (item.VisitorCategory!= 0)
+                        {
+                            <p>Visa Number: @item.VisaNumber</p>
+                            <p>Visa Valid To: @item.VisaValidTo</p>
+                        }
+                    </div>
+
+                    <div class="card-footer text-muted">
+                        <p>Entry Approved: @(item.EntryApproved == true ? "Yes" : "No")</p>
+                    </div>
+
+                </div>
+                <br>
+
+
+            }
+
+        </div>
+    }
+
