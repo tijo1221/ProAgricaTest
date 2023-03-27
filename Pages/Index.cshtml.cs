@@ -2,24 +2,28 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ProAgricaTest.Data;
+using ProAgricaTest.DTO;
 using ProAgricaTest.Models;
+using ProAgricaTest.Services;
+using System.Runtime.InteropServices;
 
 namespace ProAgricaTest.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly UKVisitorsDBContext _context;
+        private readonly IVisitorsService _service;        
 
-        //should add DTO models and map that to the DB models and pass to UI (I have focused on to get functionality, so didn't get much time to do all of these)
-
+        //To Do :  add DTO models and map that to the DB models and pass to UI
         public IEnumerable<UKVisitor> UKVisitors { get; set; } = Enumerable.Empty<UKVisitor>();
 
-        public IndexModel(UKVisitorsDBContext context) => _context = context;   
-                
-        public async Task OnGet()
+        public IndexModel(IVisitorsService service)
         {
-            //more structured way is to add this code part to service leyer
-            UKVisitors = await _context.UKVisitors.OrderByDescending(i => i.EntryDate).ToListAsync();
+            _service = service;
+        }
+
+        public async Task OnGet()
+        {            
+            UKVisitors = _service.GetUkVisitorList();
         }
     }
 }

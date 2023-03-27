@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProAgricaTest.Data;
+using ProAgricaTest.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddDbContext<UKVisitorsDBContext>(item => item.UseSqlServer(con
     {
         sqlOptions.EnableRetryOnFailure();
     }));
+
+builder.Services.AddScoped<IVisitorsService, VisitorsService>();
 
 var app = builder.Build();
 

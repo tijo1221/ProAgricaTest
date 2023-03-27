@@ -2,35 +2,33 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProAgricaTest.Data;
 using ProAgricaTest.Models;
+using ProAgricaTest.Services;
 
 namespace ProAgricaTest.Pages
 {
     public class AddNewModel : PageModel
     {
-        private readonly UKVisitorsDBContext _context;
+        private readonly IVisitorsService _service;      
 
-        public IEnumerable<UKVisitor> UKVisitors { get; set; } = Enumerable.Empty<UKVisitor>();
-
-        public AddNewModel(UKVisitorsDBContext context) => _context = context;
+        public AddNewModel(IVisitorsService service)
+        {
+            _service = service;
+        }
 
         public async Task<IActionResult> OnPost()
         {
-            //more structured way is to add this code part to service leyer
+            //To Do :  add DTO models and map that to the DB models and pass to service
 
-            UKVisitor.Id = new Guid();
-            UKVisitor.EntryApproved = true;
+            bool result = _service.SaveUKVisitorDetails(UKVisitor);
 
-            try
+            if (result)
             {
-                 _context.UKVisitors.Add(UKVisitor);
-                 await _context.SaveChangesAsync();
+                return RedirectToPage("/Index");
             }
-            catch(Exception e)
+            else
             {
-
-            }
-
-            return RedirectToPage("/Index");
+                return RedirectToPage("/Error");  
+            }          
         }
 
         [BindProperty]

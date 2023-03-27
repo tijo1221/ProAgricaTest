@@ -2,10 +2,10 @@
 @using ProAgricaTest.Models
 @model AddNewModel
 
-
 @{
-    ViewData["Title"] = "Add New";
+    ViewData["Title"] = "Add New";    
 }
+
 <h1>@ViewData["Title"]</h1>
 
 <div class="mt-5">
@@ -48,10 +48,9 @@
             <label asp-for="UKVisitor.NoOfUKEntries" class="form-label">NoOfUKEntries</label>
             <input asp-for="UKVisitor.NoOfUKEntries" class="form-label" />
         </div>
+            
+       <div id="changeVisible" style="display:none">
 
-       @* Idea is to show the other controls only when changing the dropdown to NonEU, need more work, skipping for now*@
-       @* @if(Model.UKVisitor.VisitorCategory == 0)
-        {*@            
             <div class="form-group">
                 <label asp-for="UKVisitor.VisaNumber" class="form-label">Visa Number</label>
                 <input asp-for="UKVisitor.VisaNumber" class="form-label" />
@@ -76,7 +75,8 @@
                 <label asp-for="UKVisitor.BiometricNumber" class="form-label">Biometric Number</label>
                 <input asp-for="UKVisitor.BiometricNumber" class="form-label" />
             </div>
-      @*  }*@
+
+      </div>
 
         <button class="wt-20 col-12 btn btn-primary btn-lg">Submit</button>
 
@@ -84,4 +84,22 @@
 
 
 </div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#UKVisitor_VisitorCategory").on("change", function () {
+            var categoryVal = $("#UKVisitor_VisitorCategory").val();
+
+            if(categoryVal == 1) {             
+                document.getElementById("changeVisible").style.display = "block";               
+            } else{               
+                document.getElementById("changeVisible").style.display = "none";
+            }
+        });
+    });
+</script>
+
 
